@@ -3,13 +3,12 @@ default: build
 include .env
 export
 
-CHECKMAKE_VERSION=0.1.0
-CONTAINER_NAME=docker-docker-image-dojo
+IMAGE_NAME=docker-docker-image-dojo
 
 all: lint build
 
 build:
-	@echo "Building ${CONTAINER_NAME} container..."
+	@echo "Building ${CONTAINER_NAME} image..."
 	@DOCKER_BUILDKIT=1 \
 	docker build \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
@@ -27,7 +26,7 @@ checkmake:
 clean:
 
 lint:
-	@echo "Linting the ${CONTAINER_NAME} container..."
+	@echo "Linting the ${CONTAINER_NAME} image..."
 	@docker run --rm -i \
 		hadolint/hadolint:${HADOLINT_VERSION}-alpine \
 		< Dockerfile

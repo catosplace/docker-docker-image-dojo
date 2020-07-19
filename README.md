@@ -1,4 +1,4 @@
-Docker Image Dojo Project
+# Docker Image Dojo Project
 
 ```
 export DOCKER_BUILDKIT=1
@@ -10,3 +10,11 @@ docker build \
 ```
 make
 ```
+
+Need
+* Docker
+* Dojo
+
+
+### TO-DO
+Add MicroBadger / ImageLayers.io

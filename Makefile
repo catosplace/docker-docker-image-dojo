@@ -22,8 +22,8 @@ build:
 	docker build \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg DOJO_VERSION \
-		-t catosplace/docker-docker-image-dojo .
-	@echo "docker-docker-image-dojo container built!"
+		-t catosplace/docker-docker-image-dojo ./image/.
+	@echo "${IMAGE_NAME} container built!"
 	@docker images catosplace/docker-docker-image-dojo
 
 checkmake:
@@ -42,9 +42,16 @@ lint:
 	@echo "Linting the ${IMAGE_NAME} image..."
 	@docker run --rm -i \
 		hadolint/hadolint:${HADOLINT_VERSION}-alpine \
-		hadolint --ignore DL3018 - < Dockerfile
-	@echo "${CONTAINER_NAME} linted successfully"
+		hadolint --ignore DL3018 - < ./image/Dockerfile
+	@echo "${IMAGE_NAME} linted successfully"
+
+lint_bash:
+	@echo "Linting the ${IMAGE_NAME} bash scripts..."
+	@docker run --rm \
+		-v ${PWD}:/mnt \
+		koalaman/shellcheck:${SHELLCHECK_VERSION} ./image/bashrc
+	@echo "${IMAGE_NAME} bash scripts linted successfully"
 
 test:
 
-.PHONY: all analyse_layers build checkmake clean default test
+.PHONY: all clean test default

@@ -17,4 +17,6 @@ Need
 
 
 ### TO-DO
+Iterate over list of files - and do shellcheck
+Bash Linting - profile and 20-setup-identity.sh
 Add MicroBadger / ImageLayers.io

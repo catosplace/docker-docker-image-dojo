@@ -17,6 +17,17 @@ Need
 
 
 ### TO-DO
-Iterate over list of files - and do shellcheck
-Bash Linting - profile and 20-setup-identity.sh
+Add initial tool - hadolint and test dojo container
+Add dgoss tests
 Add MicroBadger / ImageLayers.io
+Decide on CI/CD - Concourse
+Inception - use Docker Pre-Commits using Dojo Container!
+
+Tools
+* hadolint
+* shellcheck
+* dive
+* checkmake
+* dgoss
+* skopeo (inspection)
+* conftest (docker-security-check)

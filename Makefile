@@ -6,6 +6,9 @@ export
 IMAGE_NAMESPACE=catosplace
 IMAGE_NAME=docker-docker-image-dojo
 
+bash_scripts= "./image/bashrc" "./image/profile" \
+	"./image/etc_dojo.d/scripts/20-setup-identity.sh"
+
 all: lint build analyse_layers
 
 analyse_layers:
@@ -43,14 +46,18 @@ lint:
 	@docker run --rm -i \
 		hadolint/hadolint:${HADOLINT_VERSION}-alpine \
 		hadolint --ignore DL3018 - < ./image/Dockerfile
-	@echo "${IMAGE_NAME} linted successfully"
+	@echo "${IMAGE_NAME} linted successfully!"
 
-lint_bash:
-	@echo "Linting the ${IMAGE_NAME} bash scripts..."
+lint_bash: ${bash_scripts}
+
+# Note the use of the -x flag to shellcheck enabling
+# it to follow other files
+${bash_scripts}:
+	@echo "Linting the $@ bash script..."
 	@docker run --rm \
 		-v ${PWD}:/mnt \
-		koalaman/shellcheck:${SHELLCHECK_VERSION} ./image/bashrc
-	@echo "${IMAGE_NAME} bash scripts linted successfully"
+		koalaman/shellcheck:${SHELLCHECK_VERSION} -x $@
+	@echo "$@ linted successfully!"
 
 test:
 

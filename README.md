@@ -23,12 +23,11 @@ Pre-Commit
 
 
 ### TO-DO
-Add initial tool - hadolint and test dojo container
 Use .env in util Bash script + Add Docker (Optional/Version)
 Add dgoss tests
 Add MicroBadger / ImageLayers.io
 Decide on CI/CD - Concourse
-Inception - use Docker Pre-Commits using Dojo Container!
+Improve Documentation
 
 Tools
 * hadolint

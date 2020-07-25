@@ -1,0 +1,6 @@
+repos:
+- repo: https://github.com/catosplace/pre-commit-docker-image
+# - repo: ../pre-commit-docker-image
+  rev: 0.0.3
+  hooks:
+  - id: hadolint

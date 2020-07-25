@@ -7,7 +7,8 @@ IMAGE_NAMESPACE=catosplace
 IMAGE_NAME=docker-docker-image-dojo
 
 bash_scripts= "./image/bashrc" "./image/profile" \
-	"./image/etc_dojo.d/scripts/20-setup-identity.sh"
+	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
+	"./utils/install_prerequisites.sh"
 
 all: lint build analyse_layers
 
@@ -25,6 +26,7 @@ build:
 	docker build \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg DOJO_VERSION \
+		--build-arg HADOLINT_VERSION \
 		-t catosplace/docker-docker-image-dojo ./image/.
 	@echo "${IMAGE_NAME} container built!\n"
 	@docker images catosplace/docker-docker-image-dojo
@@ -44,9 +46,10 @@ clean:
 
 lint:
 	@echo "Linting the ${IMAGE_NAME} image..."
-	@docker run --rm -i \
-		hadolint/hadolint:${HADOLINT_VERSION}-alpine \
-		hadolint --ignore DL3018 - < ./image/Dockerfile
+	# @docker run --rm -i \
+	# 	hadolint/hadolint:${HADOLINT_VERSION}-alpine \
+	# 	hadolint --ignore DL3018 - < ./image/Dockerfile
+	@dojo "hadolint --ignore DL3018 ./image/Dockerfile"
 	@echo "${IMAGE_NAME} linted successfully!\n"
 
 lint_bash: ${bash_scripts}

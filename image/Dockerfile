@@ -3,6 +3,7 @@ ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION}
 
 ARG DOJO_VERSION
+ARG HADOLINT_VERSION
 
 ############
 # Install Common Dojo Scripts
@@ -19,6 +20,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 
 #TODO: Add the tools the project needs
 
+RUN wget -O /tmp/hadolint https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-Linux-x86_64 \
+  && chmod +x /tmp/hadolint \
+  && mv /tmp/hadolint /usr/local/bin/hadolint
+
 # Optional scripts to run on container start
 COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/
 
@@ -29,5 +34,5 @@ COPY profile /home/dojo/.profile
 COPY bashrc /home/dojo/.bashrc
 RUN chown dojo:dojo /home/dojo/.profile /home/dojo/.bashrc
 
-ENTRYPOINT ["/tini", "-g", "--", "/usr/bin/entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/usr/bin/entrypoint.sh"]
 CMD ["/bin/bash"]

@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
 
 ###########################################################################
 # This file ensures files are mapped from dojo_identity into dojo_home.

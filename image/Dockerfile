@@ -4,6 +4,7 @@ FROM alpine:${ALPINE_VERSION}
 
 ARG DOJO_VERSION
 ARG HADOLINT_VERSION
+ARG SHELLCHECK_VERSION
 
 ############
 # Install Common Dojo Scripts
@@ -20,9 +21,16 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 
 #TODO: Add the tools the project needs
 
+# Hadolint - https://github.com/hadolint/hadolint
 RUN wget -O /tmp/hadolint https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-Linux-x86_64 \
   && chmod +x /tmp/hadolint \
   && mv /tmp/hadolint /usr/local/bin/hadolint
+
+# Shellcheck - https://github.com/koalaman/shellcheck
+RUN wget -O /tmp/shellcheck.tar.xz https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz \
+  && tar -xvf /tmp/shellcheck.tar.xz -C /tmp \
+  && chmod +x /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck \
+  && mv /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck /usr/local/bin/shellcheck
 
 # Optional scripts to run on container start
 COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/

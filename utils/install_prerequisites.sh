@@ -10,4 +10,5 @@ sudo mv /tmp/dojo /usr/local/bin/dojo
 
 # Install pre-commit
 curl https://pre-commit.com/install-local.py | python3 -
+# shellcheck source=/dev/null
 source ~/.profile

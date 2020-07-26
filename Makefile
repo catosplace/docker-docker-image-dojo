@@ -27,6 +27,7 @@ build:
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg DOJO_VERSION \
 		--build-arg HADOLINT_VERSION \
+		--build-arg SHELLCHECK_VERSION \
 		-t catosplace/docker-docker-image-dojo ./image/.
 	@echo "${IMAGE_NAME} container built!\n"
 	@docker images catosplace/docker-docker-image-dojo
@@ -46,9 +47,6 @@ clean:
 
 lint:
 	@echo "Linting the ${IMAGE_NAME} image..."
-	# @docker run --rm -i \
-	# 	hadolint/hadolint:${HADOLINT_VERSION}-alpine \
-	# 	hadolint --ignore DL3018 - < ./image/Dockerfile
 	@dojo "hadolint --ignore DL3018 ./image/Dockerfile"
 	@echo "${IMAGE_NAME} linted successfully!\n"
 
@@ -58,9 +56,7 @@ lint_bash: ${bash_scripts}
 # it to follow other files
 ${bash_scripts}:
 	@echo "Linting the $@ bash script..."
-	@docker run --rm \
-		-v ${PWD}:/mnt \
-		koalaman/shellcheck:${SHELLCHECK_VERSION} -x $@
+	@dojo "shellcheck -x $@"
 	@echo "$@ linted successfully!\n"
 
 test:

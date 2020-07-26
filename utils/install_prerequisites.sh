@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# TODO - Pick this up from the .env file
-DOJO_VERSION=0.8.0
+# Import .env variables
+read -ra args < <(grep -E -v '^#' .env | xargs)
+export "${args[@]}"
 
 # Install Dojo
-wget -O /tmp/dojo https://github.com/kudulab/dojo/releases/download/${DOJO_VERSION}/dojo_linux_amd64
+wget -O /tmp/dojo https://github.com/kudulab/dojo/releases/download/"${DOJO_VERSION}"/dojo_linux_amd64
 chmod +x /tmp/dojo
 sudo mv /tmp/dojo /usr/local/bin/dojo
 

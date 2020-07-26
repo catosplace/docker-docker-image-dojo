@@ -23,15 +23,13 @@ Pre-Commit
 
 
 ### TO-DO
-Use .env in util Bash script + Add Docker (Optional/Version)
+util Bash script make Add Docker (Optional/Version)
 Add dgoss tests
 Add MicroBadger / ImageLayers.io
 Decide on CI/CD - Concourse
 Improve Documentation
 
 Tools
-* hadolint
-* shellcheck
 * dive
 * checkmake
 * dgoss

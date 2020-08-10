@@ -25,7 +25,9 @@ build:
 	@DOCKER_BUILDKIT=1 \
 	docker build \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
+		--build-arg BATS_VERSION \
 		--build-arg DOJO_VERSION \
+		--build-arg GOSS_VERSION \
 		--build-arg HADOLINT_VERSION \
 		--build-arg SHELLCHECK_VERSION \
 		-t catosplace/docker-docker-image-dojo ./image/.

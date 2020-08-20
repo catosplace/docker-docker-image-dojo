@@ -8,7 +8,8 @@ IMAGE_NAME=docker-docker-image-dojo
 
 bash_scripts= "./image/bashrc" "./image/profile" \
 	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
-	"./utils/install_prerequisites.sh"
+	"./utils/install_prerequisites.sh" \
+	"./test/integration/test_dojo_work/test.bats"
 
 all: lint build analyse_layers
 

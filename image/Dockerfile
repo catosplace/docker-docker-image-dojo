@@ -34,32 +34,6 @@ RUN wget -O /tmp/shellcheck.tar.xz https://github.com/koalaman/shellcheck/releas
   && chmod +x /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck \
   && mv /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck /usr/local/bin/shellcheck
 
-# Bats - https://github.com/bats-core/bats-core
-RUN wget -O /tmp/bats.tar.gz https://github.com/bats-core/bats-core/archive/v${BATS_VERSION}.tar.gz \
-  && tar -xvf /tmp/bats.tar.gz -C /tmp
-
-WORKDIR /tmp/bats-core-${BATS_VERSION}
-RUN ./install.sh /usr/local
-WORKDIR /
-
-RUN git clone https://github.com/bats-core/bats-support /opt/bats-support \
-  && git clone https://github.com/bats-core/bats-assert /opt/bats-assert
-
-# Docker - Required for Goss/dgoss testing
-RUN groupadd -g "${DOCKER_GID:-127}" docker \
-  && apk update && apk add --no-cache docker \
-  && usermod -aG docker dojo
-
-# Goss - https://github.com/aelsabbahy/goss
-RUN wget -O /tmp/goss https://github.com/aelsabbahy/goss/releases/download/${GOSS_VERSION}/goss-linux-amd64 \
-  && chmod +x /tmp/goss \
-  && mv /tmp/goss /usr/local/bin/goss
-
-# dgoss - https://github.com/aelsabbahy/goss/tree/master/extras/dgoss
-RUN wget -O /tmp/dgoss https://github.com/aelsabbahy/goss/releases/download/${GOSS_VERSION}/dgoss \
-  && chmod +x /tmp/dgoss \
-  && mv /tmp/dgoss /usr/local/bin/dgoss
-
 # Optional scripts to run on container start
 COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/
 

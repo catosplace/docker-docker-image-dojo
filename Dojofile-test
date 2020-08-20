@@ -1,0 +1,2 @@
+DOJO_DOCKER_IMAGE="catosplace/docker-bats-core-dojo:latest"
+DOJO_DOCKER_OPTIONS="--privileged"

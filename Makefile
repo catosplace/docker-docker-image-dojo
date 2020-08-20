@@ -11,7 +11,7 @@ bash_scripts= "./image/bashrc" "./image/profile" \
 	"./utils/install_prerequisites.sh" \
 	"./test/integration/test_dojo_work/test.bats"
 
-all: lint build analyse_layers
+all: lint build test analyse_layers
 
 analyse_layers:
 	@echo "Analysing ${IMAGE_NAME} layers..."
@@ -48,6 +48,8 @@ clean:
 	@docker image prune -f
 	@echo "Docker images cleaned!\n"
 
+lint_all: lint lint_bash
+
 lint:
 	@echo "Linting the ${IMAGE_NAME} image..."
 	@dojo "hadolint --ignore DL3018 ./image/Dockerfile"
@@ -63,5 +65,8 @@ ${bash_scripts}:
 	@echo "$@ linted successfully!\n"
 
 test:
+	@echo "Testing the Dojo image..."
+	@dojo -c Dojofile-test "bats test/integration/test_dojo_work"
+	@echo "Tested the Dojo image!\n"
 
 .PHONY: all clean test default

@@ -34,6 +34,9 @@ RUN wget -O /tmp/shellcheck.tar.xz https://github.com/koalaman/shellcheck/releas
   && chmod +x /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck \
   && mv /tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck /usr/local/bin/shellcheck
 
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
 # Optional scripts to run on container start
 COPY etc_dojo.d/scripts/* /etc/dojo.d/scripts/
 

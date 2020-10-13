@@ -21,7 +21,7 @@ analyse_layers:
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		wagoodman/dive:${DIVE_VERSION} \
 		--ci ${IMAGE_NAMESPACE}/${IMAGE_NAME}
-	@echo "Layer analysis completed!\n"
+	@echo "Layer analysis completed!"
 
 build:
 	@echo "Building ${IMAGE_NAME} image..."
@@ -29,12 +29,13 @@ build:
 	docker build \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg BATS_VERSION \
+		--build-arg DOCKER_VERSION \
 		--build-arg DOJO_VERSION \
 		--build-arg GOSS_VERSION \
 		--build-arg HADOLINT_VERSION \
 		--build-arg SHELLCHECK_VERSION \
 		-t catosplace/docker-docker-image-dojo ./image
-	@echo "${IMAGE_NAME} container built!\n"
+	@echo "${IMAGE_NAME} container built!"
 	@docker images catosplace/docker-docker-image-dojo
 	@echo ""
 
@@ -43,19 +44,19 @@ checkmake:
 	@docker run --rm \
 		-v ${PWD}:/data \
 		cytopia/checkmake:${CHECKMAKE_VERSION} Makefile
-	@echo "Makefile linting successful!\n"
+	@echo "Makefile linting successful!"
 
 clean:
 	@echo "Cleaning up Docker images..."
 	@docker image prune -f
-	@echo "Docker images cleaned!\n"
+	@echo "Docker images cleaned!"
 
 lint_all: lint lint_bash
 
 lint:
 	@echo "Linting the ${IMAGE_NAME} image..."
-	@dojo "hadolint --ignore DL3018 ./image/Dockerfile"
-	@echo "${IMAGE_NAME} linted successfully!\n"
+	@hadolint --ignore DL3018 ./image/Dockerfile
+	@echo "${IMAGE_NAME} linted successfully!"
 
 lint_bash: ${bash_scripts}
 
@@ -64,11 +65,11 @@ lint_bash: ${bash_scripts}
 ${bash_scripts}:
 	@echo "Linting the $@ bash script..."
 	@shellcheck -x $@
-	@echo "$@ linted successfully!\n"
+	@echo "$@ linted successfully!"
 
 test:
 	@echo "Testing the Dojo image..."
-	@dojo -c Dojofile-test "bats test/integration/test_dojo_work"
-	@echo "Tested the Dojo image!\n"
+	@bats test/integration/test_dojo_work
+	@echo "Tested the Dojo image!"
 
 .PHONY: all clean test default

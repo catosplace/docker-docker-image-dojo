@@ -9,6 +9,7 @@ IMAGE_NAME=docker-docker-image-dojo
 bash_scripts= "./image/bashrc" "./image/profile" \
 	"./image/entrypoint.sh" \
 	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
+	"./image/etc_dojo.d/scripts/80-docker.sh" \
 	"./utils/install_prerequisites.sh" \
 	"./test/integration/test_dojo_work/test.bats"
 
@@ -32,7 +33,7 @@ build:
 		--build-arg GOSS_VERSION \
 		--build-arg HADOLINT_VERSION \
 		--build-arg SHELLCHECK_VERSION \
-		-t catosplace/docker-docker-image-dojo ./image/.
+		-t catosplace/docker-docker-image-dojo ./image
 	@echo "${IMAGE_NAME} container built!\n"
 	@docker images catosplace/docker-docker-image-dojo
 	@echo ""
@@ -62,7 +63,7 @@ lint_bash: ${bash_scripts}
 # it to follow other files
 ${bash_scripts}:
 	@echo "Linting the $@ bash script..."
-	@dojo "shellcheck -x $@"
+	@shellcheck -x $@
 	@echo "$@ linted successfully!\n"
 
 test:

@@ -1,1 +1,2 @@
 DOJO_DOCKER_IMAGE="catosplace/docker-docker-image-dojo:latest"
+DOJO_DOCKER_OPTIONS="-v /var/run/docker.sock:/var/run/docker.sock"

@@ -22,7 +22,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   rm -r /tmp/dojo_git
 ############
 
-# Docker Installation (Package - Needs to be a version)
+# Docker Installation
 RUN set -eux; \
   	if ! wget -O docker.tgz "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz"; then \
 		echo >&2 "error: failed to download 'docker-${DOCKER_VERSION}' from stable for x86_64"; \
@@ -38,7 +38,6 @@ RUN set -eux; \
 	\
 	dockerd --version; \
 	docker --version
-# RUN apk add --no-cache docker
 
 #TODO: Add the tools the project needs
 

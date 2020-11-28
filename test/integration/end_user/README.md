@@ -1,0 +1,1 @@
+Used to test the Dojo image expectations and tooling

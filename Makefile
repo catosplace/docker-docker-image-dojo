@@ -69,7 +69,7 @@ ${bash_scripts}:
 
 test:
 	@echo "Testing the Dojo image..."
-	@bats test/integration/test_dojo_work
+	@bats test/integration/end_user/bats
 	@echo "Tested the Dojo image!"
 
 .PHONY: all clean test default

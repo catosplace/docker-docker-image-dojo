@@ -1,0 +1,1 @@
+Used for test fixtures representative of the Dojo image use

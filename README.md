@@ -2,12 +2,23 @@
 
 This is a development environment for Docker images built using [Dojo](https://github.com/kudulab/dojo).
 
-This image enables you to lint your Docker images.
+This image enables you to build,lint and test your Docker images.
+
+## Specification
+This image has installed:
+
+* bats
+* checkmake
+* dive
+* docker
+* dojo
+* hadolint
+* shellcheck
 
 ## Usage
 
 1. Install [Docker](https://docs.docker.com/install/), if you do not have it already.
-2. Install [Dojo](https://github.com/ai-traders/dojo), it is a self-containted binary, so just place it somewhere on the `PATH`. On OSX you can use `brew install kudulab/homebrew-dojo-osx/dojo`.
+2. Install [Dojo](https://github.com/kudulab/dojo), it is a self-containted binary, so just place it somewhere on the `PATH`. On OSX you can use `brew install kudulab/homebrew-dojo-osx/dojo`.
 
 **On Linux**
 ```bash
@@ -24,7 +35,7 @@ cd docker-docker-image-dojo
 dojo
 ```
 
-This will enter the Dojo Docker container with all the tools needed to lint your Docker image. Your local code is available in the current directory `/dojo/work`.
+This will enter the Dojo Docker container with all the tools needed to build, lint and test your Docker image. Your local code is available in the current directory `/dojo/work`.
 
 ## Tools
 This Dojo image provides the following tools for use when building Docker images
@@ -49,8 +60,6 @@ $ shellcheck test.sh
 **Dependencies**
 * Docker
 * Dojo
-* [catosplace/docker-bats-core-dojo](https://github.com/catosplace/docker-bats-core-dojo) Docker image
-
 
 ```
 export DOCKER_BUILDKIT=1
@@ -69,14 +78,38 @@ make
 
 `pre-commit run --all-files`
 
+## License
+
+MIT License
+
+Copyright (c) 2020 Catosplace
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 ### TO-DO
-Update Development Documentation
-Add License
-Fix up the Structure of the Project
-Add MicroBadger / ImageLayers.io
-Decide on CI/CD - Circle CI?
-Add ADRS?
+* Update Development Documentation
+* Add License
+* Fix up the Structure of the Project
+* Add MicroBadger / ImageLayers.io
+* Decide on CI/CD - Circle CI?
+* Add ADRS?
 
 Tools
 * dive

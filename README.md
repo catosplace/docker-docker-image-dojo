@@ -10,8 +10,8 @@ This image has installed:
 * bats
 * checkmake
 * dive
-* docker
-* dojo
+* docker `19.03.13`
+* dojo `0.10.2`
 * hadolint
 * shellcheck
 

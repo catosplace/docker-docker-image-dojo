@@ -28,7 +28,9 @@ RUN set -eux; \
     echo >&2 "error: failed to download adr-tools-3.0.0"; \
     exit 1; \
   fi; \
-  tar xvzf adr-tools.tar.gz -C /usr/local/bin/;
+  tar xvzf adr-tools.tar.gz -C /usr/local/bin/; \
+  rm adr-tools.tar.gz;
+
 ENV PATH="/usr/local/bin/adr-tools-3.0.0/src:${PATH}"
 
 # Docker Installation

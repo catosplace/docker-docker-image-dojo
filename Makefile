@@ -11,6 +11,7 @@ bash_scripts= "./image/bashrc" "./image/profile" \
 	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
 	"./image/etc_dojo.d/scripts/80-docker-socket.sh" \
 	"./utils/install_prerequisites.sh" \
+	"./test/integration/end_user/bats/01_dojo.bats" \
 	"./test/integration/end_user/bats/test.bats"
 
 all: lint build test analyse_layers

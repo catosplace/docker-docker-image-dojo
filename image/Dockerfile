@@ -22,6 +22,15 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   rm -r /tmp/dojo_git
 ############
 
+# ADR
+RUN set -eux; \
+  if ! wget -O adr-tools.tar.gz "https://github.com/npryce/adr-tools/archive/3.0.0.tar.gz"; then \
+    echo >&2 "error: failed to download adr-tools-3.0.0"; \
+    exit 1; \
+  fi; \
+  tar xvzf adr-tools.tar.gz -C /usr/local/bin/;
+ENV PATH="/usr/local/bin/adr-tools-3.0.0/src:${PATH}"
+
 # Docker Installation
 RUN set -eux; \
   	if ! wget -O docker.tgz "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz"; then \

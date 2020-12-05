@@ -9,9 +9,9 @@ IMAGE_NAME=docker-docker-image-dojo
 bash_scripts= "./image/bashrc" "./image/profile" \
 	"./image/entrypoint.sh" \
 	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
-	"./image/etc_dojo.d/scripts/80-docker.sh" \
+	"./image/etc_dojo.d/scripts/80-docker-socket.sh" \
 	"./utils/install_prerequisites.sh" \
-	"./test/integration/test_dojo_work/test.bats"
+	"./test/integration/end_user/bats/test.bats"
 
 all: lint build test analyse_layers
 

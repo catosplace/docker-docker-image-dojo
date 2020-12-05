@@ -83,3 +83,5 @@ if [ -f ~/.bash_aliases ]; then
     # shellcheck source=/dev/null
     . ~/.bash_aliases
 fi
+
+export PATH=/usr/local/bin/adr-tools-3.0.0/src:$PATH

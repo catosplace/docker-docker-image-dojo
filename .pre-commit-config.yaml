@@ -1,7 +1,15 @@
 repos:
-- repo: https://github.com/catosplace/pre-commit-docker-image
-# - repo: ../pre-commit-docker-image
-  rev: 0.0.4
-  hooks:
-  - id: hadolint
-  - id: shellcheck
+
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v2.2.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-conventional']
+
+  - repo: https://github.com/catosplace/pre-commit-docker-image
+  # - repo: ../pre-commit-docker-image
+    rev: 0.0.4
+    hooks:
+      - id: hadolint
+      - id: shellcheck

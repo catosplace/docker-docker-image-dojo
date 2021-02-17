@@ -4,9 +4,9 @@ This script will install [Docker](https://www.docker.com/), [Dojo](https://githu
 ## Specification
 This script will install the following versions
 
-* docker `19.0.13`
-* dojo `0.10.2`
-* pre-commit `2.9.2`
+* docker `20.10.3`
+* dojo `0.10.3`
+* pre-commit `2.10.1`
 
 You will need to run the script as an administrator due to some Docker installation permissions.
 

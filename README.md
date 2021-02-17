@@ -10,10 +10,10 @@ This image has installed:
 * bats
 * checkmake
 * dive
-* docker `19.03.13`
-* dojo `0.10.2`
-* hadolint
-* shellcheck
+* docker `20.10.3`
+* dojo `0.10.3`
+* hadolint `1.22.1`
+* shellcheck `0.7.1`
 
 ## Usage
 
@@ -22,7 +22,7 @@ This image has installed:
 
 **On Linux**
 ```bash
-DOJO_VERSION=0.9.0
+DOJO_VERSION=0.10.2
 wget -O dojo https://github.com/kudulab/dojo/releases/download/${DOJO_VERSION}/dojo_linux_amd64
 sudo mv dojo /usr/local/bin
 sudo chmod +x /usr/local/bin/dojo
@@ -75,6 +75,8 @@ make
 **Pre-Commit**
 
 `pre-commit install`
+
+`pre-commit install --hook-type commit-msg`
 
 `pre-commit run --all-files`
 

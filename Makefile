@@ -11,8 +11,13 @@ bash_scripts= "./image/bashrc" "./image/profile" \
 	"./image/etc_dojo.d/scripts/20-setup-identity.sh" \
 	"./image/etc_dojo.d/scripts/80-docker-socket.sh" \
 	"./utils/install_prerequisites.sh" \
+	"./utils/generate_test_dojofile.sh" \
 	"./test/integration/end_user/bats/01_dojo.bats" \
-	"./test/integration/end_user/bats/test.bats"
+	"./test/integration/end_user/bats/05_docker.bats" \
+	"./test/integration/end_user/bats/10_adrtools.bats" \
+	"./test/integration/end_user/bats/15_bats.bats" \
+	"./test/integration/end_user/bats/20_hadolint.bats" \
+	"./test/integration/end_user/bats/21_shellcheck.bats" 
 
 all: lint build test analyse_layers
 
@@ -27,8 +32,9 @@ analyse_layers:
 build:
 	@echo "Building ${IMAGE_NAME} image..."
 	@DOCKER_BUILDKIT=1 \
-	docker build \
+	docker build --no-cache \
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
+		--build-arg ADR_TOOLS_VERSION=${ADR_TOOLS_VERSION} \
 		--build-arg BATS_VERSION \
 		--build-arg DOCKER_VERSION \
 		--build-arg DOJO_VERSION \

@@ -2,10 +2,10 @@ ARG ALPINE_VERSION
 
 FROM alpine:${ALPINE_VERSION}
 
+ARG ADR_TOOLS_VERSION
 ARG BATS_VERSION
 ARG DOCKER_VERSION
 ARG DOJO_VERSION
-ARG GOSS_VERSION
 ARG HADOLINT_VERSION
 ARG SHELLCHECK_VERSION
 
@@ -24,14 +24,15 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 
 # ADR
 RUN set -eux; \
-  if ! wget -O adr-tools.tar.gz "https://github.com/npryce/adr-tools/archive/3.0.0.tar.gz"; then \
-    echo >&2 "error: failed to download adr-tools-3.0.0"; \
+  if ! wget -O adr-tools.tar.gz "https://github.com/npryce/adr-tools/archive/${ADR_TOOLS_VERSION}.tar.gz"; then \
+    echo >&2 "error: failed to download adr-tools-${ADR_TOOLS_VERSION}"; \
     exit 1; \
   fi; \
   tar xvzf adr-tools.tar.gz -C /usr/local/bin/; \
   rm adr-tools.tar.gz;
 
-ENV PATH="/usr/local/bin/adr-tools-3.0.0/src:${PATH}"
+ENV ADR_TOOLS_VERSION=${ADR_TOOLS_VERSION}
+# ENV PATH="/usr/local/bin/adr-tools-${ADR_TOOLS_VERSION}/src:${PATH}"
 
 # Docker Installation
 RUN set -eux; \

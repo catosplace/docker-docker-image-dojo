@@ -84,4 +84,4 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export PATH=/usr/local/bin/adr-tools-3.0.0/src:$PATH
+export PATH=/usr/local/bin/adr-tools-$ADR_TOOLS_VERSION/src:$PATH
